@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Author Website</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --wine: #722F37;
+      --wine-dark: #4a1a20;
+      --wine-light: #9e4a54;
+      --gold: #c9a96e;
+      --gold-light: #e8d5a8;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow-x: hidden
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: #0d0608;
+      color: #f0e8ea;
+      min-height: 100vh;
+    }
+
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: radial-gradient(ellipse 80% 80% at 15% 50%, #3a0e14 0%, transparent 60%), radial-gradient(ellipse 60% 70% at 85% 30%, #1a0a2e 0%, transparent 55%), linear-gradient(135deg, #0d0608 0%, #1a0510 40%, #0a0a1a 100%);
+    }
+
+    .bg-particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(110vh);
+        opacity: 0
+      }
+
+      10% {
+        opacity: 1
+      }
+
+      90% {
+        opacity: 0.6
+      }
+
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0
+      }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 72px;
+      background: rgba(13, 6, 8, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid rgba(201, 169, 110, 0.2);
+      animation: slideDown 0.8s ease both;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(240, 232, 234, 0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      cursor: pointer;
+      font-weight: 300;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-name {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #f0e8ea;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+
+    /* LEFT - Wine Red */
+    .hero-left {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .wine-backdrop {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #4a0f17 0%, #722f37 40%, #9e1a2a 70%, #3a0810 100%);
+    }
+
+    .wine-texture {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 12px);
+    }
+
+    .wine-glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.25) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 1
+      }
+    }
+
+    .wine-corner {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      border-top: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.5;
+    }
+
+    .girl-figure {
+      position: relative;
+      z-index: 2;
+      width: 320px;
+      height: 500px;
+      animation: heroReveal 1.2s ease 0.3s both;
+    }
+
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .left-text {
+      position: absolute;
+      bottom: 3rem;
+      left: 3rem;
+      z-index: 3;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .left-text .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .left-text .quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.4;
+      max-width: 400px;
+    }
+
+    /* RIGHT - Glass */
+    .hero-right {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 7rem 4rem 4rem 4rem;
+      overflow: hidden;
+    }
+
+    .right-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.06) 0%, rgba(201, 169, 110, 0.04) 50%, rgba(114, 47, 55, 0.08) 100%);
+      backdrop-filter: blur(40px);
+    }
+
+    .right-border {
+      position: absolute;
+      left: 0;
+      top: 10%;
+      bottom: 10%;
+      width: 0.5px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+
+    .right-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .genre-tag {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    .author-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 1s ease 0.65s both;
+    }
+
+    .author-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(201, 169, 110, 0.85);
+      margin-bottom: 2.5rem;
+      animation: fadeUp 1s ease 0.75s both;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      line-height: 2;
+      font-weight: 300;
+      color: rgba(240, 232, 234, 0.65);
+      max-width: 400px;
+      margin-bottom: 3rem;
+      animation: fadeUp 1s ease 0.9s both;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 1s ease 1s both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 2px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--wine);
+      color: #fff;
+      box-shadow: 0 0 30px rgba(114, 47, 55, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--wine-light);
+      box-shadow: 0 0 50px rgba(114, 47, 55, 0.7);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f0e8ea;
+      border: 0.5px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: var(--gold);
+    }
+
+    .glass-panels {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: fadeUp 1.2s ease 1.2s both;
+    }
+
+    .glass-stat {
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border-radius: 4px;
+      padding: 14px 18px;
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .glass-stat .num {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold);
+      display: block;
+    }
+
+    .glass-stat .label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(240, 232, 234, 0.5);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .hero-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .hero-divider::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: #0d0608;
+      clip-path: polygon(0 60%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* PLATFORMS */
+    .platforms-section {
+      position: relative;
+      z-index: 10;
+      padding: 6rem 4rem;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: #f0e8ea;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 0.5px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 3.5rem;
+    }
+
+    .platforms-grid {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .platform-card {
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201, 169, 110, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .platform-card:hover::before {
+      opacity: 1
+    }
+
+    .platform-card:hover {
+      border-color: rgba(201, 169, 110, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(114, 47, 55, 0.2);
+    }
+
+    .platform-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .platform-icon.scrollstack {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+    }
+
+    .platform-icon.wattpad {
+      background: linear-gradient(135deg, #f96d00, #e84545);
+    }
+
+    .platform-icon.inkitt {
+      background: linear-gradient(135deg, #6c3483, #a569bd);
+    }
+
+    .platform-name {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #f0e8ea;
+      margin-bottom: 0.5rem;
+    }
+
+    .platform-desc {
+      font-size: 12px;
+      line-height: 1.8;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      color: rgba(240, 232, 234, 0.55);
+      margin-bottom: 1.5rem;
+    }
+
+    .platform-link {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .platform-link::after {
+      content: '→';
+      transition: transform 0.3s;
+    }
+
+    .platform-card:hover .platform-link::after {
+      transform: translateX(4px)
+    }
+
+    .platform-corner-tl,
+    .platform-corner-br {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: rgba(201, 169, 110, 0.3);
+      border-style: solid;
+    }
+
+    .platform-corner-tl {
+      top: 12px;
+      left: 12px;
+      border-width: 1px 0 0 1px
+    }
+
+    .platform-corner-br {
+      bottom: 12px;
+      right: 12px;
+      border-width: 0 1px 1px 0
+    }
+
+    /* ABOUT + FOOTER */
+    .about-section {
+      position: relative;
+      z-index: 10;
+      padding: 4rem;
+      text-align: center;
+    }
+
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 2rem 4rem;
+      border-top: 0.5px solid rgba(201, 169, 110, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-name {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 3px;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(240, 232, 234, 0.3);
+      letter-spacing: 1px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      position: relative;
+      width: 90%;
+      max-width: 1200px;
+      max-height: 90vh;
+      margin-top: 15px;
+      overflow-y: auto;
+      background: linear-gradient(145deg, #1a0a0d 0%, #0f0818 50%, #050d08 100%);
+      border: 0.5px solid rgba(201, 169, 110, 0.25);
+      border-radius: 4px;
+      animation: modalIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.88) translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.06);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: rgba(240, 232, 234, 0.6);
+      transition: all 0.25s;
+      font-family: sans-serif;
+    }
+
+    .modal-close:hover {
+      background: rgba(114, 47, 55, 0.3);
+      color: #fff;
+      border-color: var(--wine);
+    }
+
+    .modal-hero {
+      position: relative;
+      background: linear-gradient(135deg, #722f37 0%, #4a0f17 60%, #1a0a2e 100%);
+      padding: 3.5rem 3rem 4rem;
+      overflow: hidden;
+    }
+
+    .modal-hero-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(201, 169, 110, 0.15) 0%, transparent 50%), repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 14px);
+    }
+
+    .modal-author-avatar {
+      position: relative;
+      z-index: 1;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: linear-gradient(135deg, #9e4a54, #722f37);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      color: var(--gold-light);
+      font-weight: 700;
+      letter-spacing: 2px;
+      animation: avatarFloat 6s ease-in-out infinite;
+      box-shadow: 0 0 0 8px rgba(201, 169, 110, 0.08), 0 0 40px rgba(114, 47, 55, 0.5);
+    }
+
+    @keyframes avatarFloat {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .modal-name {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-role {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--gold-light);
+      letter-spacing: 2px;
+    }
+
+    .modal-body {
+      padding: 2.5rem 3rem;
+    }
+
+    .modal-bio {
+      font-size: 15px;
+      line-height: 2;
+      font-weight: 300;
+      color: rgba(240, 232, 234, 0.75);
+      margin-bottom: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .modal-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .m-stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 0.5px solid rgba(201, 169, 110, 0.15);
+      border-radius: 4px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .m-stat .n {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .m-stat .l {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(240, 232, 234, 0.45);
+    }
+
+    .modal-quote {
+      border-left: 2px solid var(--wine);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      background: rgba(114, 47, 55, 0.1);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .modal-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: rgba(240, 232, 234, 0.8);
+      line-height: 1.8;
+    }
+
+    .modal-platforms-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .modal-platforms {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .m-platform {
+      padding: 8px 18px;
+      border-radius: 2px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Lato', sans-serif;
+      border: 0.5px solid;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .m-platform.s {
+      border-color: rgba(100, 130, 200, 0.4);
+      color: rgba(180, 200, 255, 0.8);
+      background: rgba(100, 130, 200, 0.08);
+    }
+
+    .m-platform.w {
+      border-color: rgba(249, 109, 0, 0.4);
+      color: rgba(255, 180, 100, 0.9);
+      background: rgba(249, 109, 0, 0.08);
+    }
+
+    .m-platform.i {
+      border-color: rgba(108, 52, 131, 0.4);
+      color: rgba(185, 140, 220, 0.9);
+      background: rgba(108, 52, 131, 0.08);
+    }
+
+    .m-platform:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.3);
+    }
+
+    .modal::-webkit-scrollbar {
+      width: 3px
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(201, 169, 110, 0.3);
+      border-radius: 2px
+    }
+
+    /* BOOKS MODAL */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .book-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 0.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: linear-gradient(135deg, var(--wine), #1a050a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: rgba(201, 169, 110, 0.5);
+      border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    .book-cover::after {
+      content: 'COVER';
+      letter-spacing: 4px;
+      font-size: 12px;
+    }
+
+    .book-info {
+      padding: 1rem;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .book-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 4px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .book-genre {
+      font-size: 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .books-modal-header {
+      text-align: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.5px solid rgba(201, 169, 110, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .books-modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: #fff;
+      letter-spacing: 3px;
+    }
+
+    .books-modal-subtitle {
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* --- RESPONSIVE STYLES --- */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        margin-top: 30px;
+        min-height: 70vh;
+      }
+
+      .hero-right {
+        padding: 4rem 3rem 6rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-desc {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .glass-panels {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 3rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .author-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0 1.5rem;
+      }
+
+      .nav-logo,
+      .nav-name {
+        display: none;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .left-text {
+        left: 2rem;
+        right: 2rem;
+        text-align: center;
+      }
+
+      .left-text .quote {
+        margin: 0 auto;
+      }
+
+      .platforms-section {
+        padding: 5rem 2rem;
+      }
+
+      .about-section {
+        padding: 3rem 2rem;
+      }
+
+      footer {
+        padding: 2rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .modal-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-left {
+        margin-top: 30px;
+        min-height: 60vh;
+      }
+
+      .girl-figure {
+        max-width: 80%;
+      }
+
+      .hero-right {
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .glass-panels {
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .platforms-grid {
+        gap: 1.5rem;
+      }
+
+      .modal-hero {
+        padding: 3rem 1.5rem 2rem;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-quote {
+        padding: 1rem;
+      }
+
+      .books-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #booksModalBox {
+        padding: 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-canvas"></div>
+  <div class="bg-particles" id="particles"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo" id="navLogo">The Literary World</div>
+    <div class="nav-links">
+      <a href="#">Works</a>
+      <a href="#" onclick="openModal();return false;">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-name" id="navName">Smiling</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <!-- LEFT: Author Image -->
+    <div class="hero-left">
+      <div class="girl-figure">
+        <img src="public/Hero.png" alt="Smiling"
+          style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));" />
+      </div>
+      <div class="left-text">
+        <p class="tagline" id="leftTagline">A Professional Author</p>
+        <p class="quote" id="leftQuote">"She is a mess But She is a Masterpiece"</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Glass -->
+    <div class="hero-right">
+      <div class="right-bg"></div>
+      <div class="right-border"></div>
+      <div class="right-content">
+        <p class="genre-tag" id="genreTag">✦ Romance · Fantasy · Drama ✦</p>
+        <h1 class="author-title" id="heroName">Smiling<br></h1>
+        <p class="author-subtitle" id="heroSubtitle">Storyteller &amp; Wordsmith</p>
+        <p class="hero-desc" id="heroDesc">Weaving worlds from imagination, I craft stories that linger long after the
+          last page is turned. Every character breathes, every sentence sings — welcome to my universe of words.</p>
+        <div class="btn-group">
+          <button class="btn btn-primary"
+            onclick="document.getElementById('platforms').scrollIntoView({behavior:'smooth'})">Explore My Books</button>
+          <button class="btn btn-glass" onclick="openModal()">About Me</button>
+        </div>
+      </div>
+      <div class="glass-panels">
+        <div class="glass-stat"><span class="num" id="stat1Num">5</span><span class="label"
+            id="stat1Label">Stories</span></div>
+        <div class="glass-stat"><span class="num" id="stat2Num">23K+</span><span class="label"
+            id="stat2Label">Readers</span></div>
+        <div class="glass-stat"><span class="num" id="stat3Num">3</span><span class="label"
+            id="stat3Label">Platforms</span></div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+  </section>
+
+  <!-- PLATFORMS -->
+  <section class="platforms-section" id="platforms">
+    <p class="section-label">✦ Read My Work On ✦</p>
+    <h2 class="section-title">Find Me Across Platforms</h2>
+    <div class="section-line"></div>
+    <div class="platforms-grid">
+
+      <!-- Scrollstack -->
+      <a class="platform-card" id="linkScrollstack" href="#" onclick="openBooksModal('scrollstack'); return false;">
+        <div class="platform-corner-tl"></div>
+        <div class="platform-corner-br"></div>
+        <div class="platform-icon" style="background: none;">
+          <img src="public/logo/scrollstack-logo.png" alt="Scrollstack"
+            style="width: 100%; height: 100%; border-radius: 12px; object-fit: contain;" />
+        </div>
+        <p class="platform-name">Scrollstack</p>
+        <p class="platform-desc" id="descScrollstack">Discover my serialized stories and exclusive newsletters for
+          dedicated readers.</p>
+        <span class="platform-link">Read Now</span>
+      </a>
+
+      <!-- Wattpad -->
+      <a class="platform-card" id="linkWattpad" href="#" onclick="openBooksModal('wattpad'); return false;">
+        <div class="platform-corner-tl"></div>
+        <div class="platform-corner-br"></div>
+        <div class="platform-icon" style="background: none;">
+          <img src="public/logo/wattpad-logo.png" alt="Wattpad"
+            style="width: 100%; height: 100%; border-radius: 12px; object-fit: contain;" />
+        </div>
+        <p class="platform-name">Wattpad</p>
+        <p class="platform-desc" id="descWattpad">Join millions of readers — follow my stories on the world's largest
+          reading community.</p>
+        <span class="platform-link">Follow Me</span>
+      </a>
+
+      <!-- Inkitt -->
+      <a class="platform-card" id="linkInkitt" href="#" onclick="openBooksModal('inkitt'); return false;">
+        <div class="platform-corner-tl"></div>
+        <div class="platform-corner-br"></div>
+        <div class="platform-icon" style="background: none;">
+          <img src="public/logo/Inkitt-logo.png" alt="Inkitt"
+            style="width: 100%; height: 100%; border-radius: 12px; object-fit: contain;" />
+        </div>
+        <p class="platform-name">Inkitt</p>
+        <p class="platform-desc" id="descInkitt">Explore my stories and connect with a passionate writing
+          community.</p>
+        <span class="platform-link">Explore</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT CTA -->
+  <div class="about-section">
+    <p class="section-label">✦ The Author Behind The Words ✦</p>
+    <h2 class="section-title" style="margin-bottom:1.5rem">Want to Know My Story?</h2>
+    <button class="btn btn-primary" onclick="openModal()"
+      style="font-size:13px;padding:14px 40px;letter-spacing:3px;">Meet The Author</button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name" id="footerName">Smiling</div>
+    <div class="footer-copy">© 2025 · All Rights Reserved · Crafted with Words</div>
+  </footer>
+
+  <!-- ABOUT MODAL -->
+  <div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modalBox">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-hero">
+        <div class="modal-hero-pattern"></div>
+        <img src="public/About.jpeg" class="modal-author-avatar" id="modalAvatar" alt="Author"
+          style="object-fit: cover;">
+        <h2 class="modal-name" id="modalName">Smiling</h2>
+        <p class="modal-role" id="modalRole">Author · Storyteller · Dreamer</p>
+      </div>
+      <div class="modal-body">
+        <p class="modal-bio" id="modalBio">I'm a new author who pours buried emotions onto pages through ink. I write
+          obsession wrapped in devotion, soft romance tangled with darkness. I tell the stories of souls who are broken,
+          bruised, or branded as bad -yet find a home in each other. In their silence, love speaks loudest.
+          Beacuse true love isn't perfect -it's two imperfect hearts choosing to stay, to heal & to burn together.</p>
+
+        <p class="modal-bio" id="modalBio">I write obsession wrapped in devotion, soft romance tangled with darkness.
+          I tell the stories of souls who are broken, bruised, or branded as bad -yet find a home in each other.
+
+          In their silence, love speaks loudest.
+
+          True love isn't perfect -it's two imperfect hearts choosing to stay, to heal & to burn together.</p>
+        <div class="modal-stats">
+          <div class="m-stat"><span class="n" id="mStat1">5</span><span class="l" id="mStat1L">Stories</span>
+          </div>
+          <div class="m-stat"><span class="n" id="mStat2">23K+</span><span class="l" id="mStat2L">Readers
+              Worldwide</span></div>
+          <div class="m-stat"><span class="n" id="mStat3">1 Yr</span><span class="l" id="mStat3L">Writing
+              Journey</span></div>
+        </div>
+        <div class="modal-quote">
+          <p id="modalQuote">"Imagination spills where ink touches paper, turning silence into stories"</p>
+        </div>
+        <p class="modal-platforms-title">✦ Find My Work</p>
+        <div class="modal-platforms">
+          <a class="m-platform s" id="mLinkS" href="#"
+            onclick="openBooksModal('scrollstack'); return false;">Scrollstack</a>
+          <a class="m-platform w" id="mLinkW" href="#" onclick="openBooksModal('wattpad'); return false;">Wattpad</a>
+          <a class="m-platform i" id="mLinkI" href="#" onclick="openBooksModal('inkitt'); return false;">Inkitt</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKS MODAL -->
+  <div class="modal-overlay" id="booksModalOverlay" onclick="handleBooksOverlayClick(event)">
+    <div class="modal" id="booksModalBox" style="padding: 3rem;">
+      <button class="modal-close" onclick="closeBooksModal()">✕</button>
+      <div class="books-modal-header">
+        <h2 class="books-modal-title">My Works</h2>
+        <p class="books-modal-subtitle" id="booksModalSubtitle">Available on Platform</p>
+      </div>
+      <div class="books-grid" id="booksGrid">
+        <!-- Books will be injected here via JS -->
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // Floating particles
+    (function () {
+      const c = document.getElementById('particles');
+      const colors = ['rgba(201,169,110,0.4)', 'rgba(114,47,55,0.5)', 'rgba(255,255,255,0.2)', 'rgba(160,80,100,0.3)'];
+      for (let i = 0; i < 28; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const s = Math.random() * 5 + 2;
+        p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;background:${colors[Math.floor(Math.random() * colors.length)]};animation-duration:${Math.random() * 18 + 12}s;animation-delay:${Math.random() * -20}s;`;
+        c.appendChild(p);
+      }
+    })();
+
+    // Books Data
+    const booksData = {
+      scrollstack: [
+        { title: "Mine In The Silence", genre: "Romance", cover: "public/Scoll Stack/Book 1.webp", url: "https://smiling10.stck.me/story/1191321/Mine-In-The-Silence" },
+        { title: "Veil Crown", genre: "Upcoming", cover: "public/Scoll Stack/Book 2.webp", url: "https://smiling10.stck.me/story/1276631/veil-crown-Upcoming" },
+        { title: "The Sacred Love Vow", genre: "Upcoming", cover: "public/Scoll Stack/Book 3.webp", url: "https://smiling10.stck.me/story/1812882/The-Sacred-Love-Vow-Upcoming" },
+        { title: "The Heartless Mafia Angel", genre: "Upcoming", cover: "public/Scoll Stack/Book 4.webp", url: "https://smiling10.stck.me/story/1812960/THE-HEARTLEss-MAgIA-AngEL-Upcoming" }
+      ],
+      inkitt: [
+        { title: "Mine In The Silence", genre: "Fiction", cover: "public/Inkitt/Book 1.webp", url: "https://www.inkitt.com/stories/1606626" }
+      ],
+      wattpad: [
+        { title: "Mine In The Silence", genre: "Fiction", cover: "public/Wattpad/Book 1.webp", url: "https://www.wattpad.com/story/400144313-%F0%9D%93%9C%F0%9D%93%B2%F0%9D%93%B7%F0%9D%93%AE-%F0%9D%93%98%F0%9D%93%B7-%F0%9D%93%A3%F0%9D%93%B1%F0%9D%93%AE-%F0%9D%93%A2%F0%9D%93%B2%F0%9D%93%B5%F0%9D%93%AE%F0%9D%93%B7%F0%9D%93%AC%F0%9D%93%AE" }
+      ],
+      default: [
+        { title: "Echoes of Eternity", genre: "Fantasy Romance" },
+        { title: "The Midnight Court", genre: "Dark Fantasy" },
+        { title: "A Whisper of Stars", genre: "Sci-Fi Romance" },
+        { title: "Crimson Bound", genre: "Paranormal Drama" },
+        { title: "Crown of Thorns", genre: "Epic Fantasy" },
+        { title: "Shattered Glass", genre: "Contemporary Drama" }
+      ]
+    };
+
+    // Books Modal
+    function openBooksModal(platform) {
+      const overlay = document.getElementById('booksModalOverlay');
+      const grid = document.getElementById('booksGrid');
+      const subtitle = document.getElementById('booksModalSubtitle');
+
+      let platformName = platform;
+      let platformUrl = '';
+      if (platform === 'scrollstack') {
+        platformName = 'Scrollstack';
+        platformUrl = 'https://smiling10.stck.me/';
+      } else if (platform === 'wattpad') {
+        platformName = 'Wattpad';
+        platformUrl = 'https://www.wattpad.com/user/Smiling1002';
+      } else if (platform === 'inkitt') {
+        platformName = 'Inkitt';
+        platformUrl = 'https://www.inkitt.com/Smiling1002';
+      }
+
+      subtitle.textContent = `Available on ${platformName}`;
+
+      const platformBooks = booksData[platform] || booksData.default;
+
+      grid.innerHTML = platformBooks.map(book => {
+        const coverHtml = book.cover
+          ? `<img src="${book.cover}" alt="${book.title}" style="width: 100%; aspect-ratio: 2/3; object-fit: cover; border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);">`
+          : `<div class="book-cover"></div>`;
+        const linkHref = book.url ? book.url : platformUrl;
+
+        return `
+          <a class="book-card" href="${linkHref}" target="_blank">
+            ${coverHtml}
+            <div class="book-info">
+              <h3 class="book-title">${book.title}</h3>
+              <span class="book-genre">${book.genre}</span>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      overlay.classList.add('active');
+    }
+
+    function closeBooksModal() {
+      document.getElementById('booksModalOverlay').classList.remove('active');
+    }
+
+    function handleBooksOverlayClick(e) {
+      if (e.target === document.getElementById('booksModalOverlay')) closeBooksModal();
+    }
+
+    // Modal
+    function openModal() { document.getElementById('modal').classList.add('active'); }
+    function closeModal() { document.getElementById('modal').classList.remove('active'); }
+    function handleOverlayClick(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeModal();
+        if (typeof closeBooksModal === 'function') closeBooksModal();
+      }
+    });
+
+
+  </script>
+</body>
+
+</html>
